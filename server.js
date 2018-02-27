@@ -8,9 +8,9 @@ dotenv.config()
 
 // some setup stuff
 const app = express(),
-      production = process.env.NODE_ENV === 'production',
-      PORT = production ? process.env.PORT : 5000,
-      MONGO_URI = production
+      isProd = process.env.NODE_ENV === 'production',
+      PORT = isProd ? process.env.PORT : 5000,
+      MONGO_URI = isProd
         ? process.env.MONGO_PROD_URI
         : process.env.MONGO_DEV_URI
 
@@ -29,3 +29,7 @@ app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'))
 app.listen(PORT, () => {
   console.log(`CS-PG-React API listening on port ${PORT}!`)
 });
+
+// TODO: Add real authorization to API. I just read about how req.headers.referer
+// can be faked, so in theory, if anyone actually cared to (which is pretty doubtful)
+// this pitiful security measuer could pretty easily be thwarted to gain access to api
