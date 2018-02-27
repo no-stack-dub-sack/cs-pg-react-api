@@ -1,0 +1,20 @@
+{
+  "name": "cs-pg-react-api",
+  "version": "1.0.0",
+  "description": "api for cs-pg-react backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "git push origin master && git push heroku master"
+  },
+  "repository": "no-stack-dub-sack/cs-pg-react-api",
+  "author": "Peter A. Weinberg <pweinberg633@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.4"
+  }
+}
