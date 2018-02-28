@@ -28,13 +28,17 @@ module.exports = {
     } else {
       // if exact code string already stored, don't dupe
       CodeStrings.findOne({ code }, (err, string) => {
-        if (err)
-          error(err), res.status(500)
+        if (err) {
+          error(err)
+          return res.status(500)
+        }
         if (!string) {
           console.log('Saving code...')
           CodeStrings.create({ _id, code }, (err) => {
-            if (err)
-              error(err), res.status(500)
+            if (err) {
+              error(err)
+              return res.status(500)
+            }
             res.send({ hash: _id.toString() })
           })
         } else {
@@ -50,18 +54,26 @@ module.exports = {
     if (!isAuthorized(api_key, req.headers.referer, 'GET')) {
       res.status(401)
     } else {
-      console.log('Retrieving code...')
       CodeStrings.findById(id, (err, strings) => {
         if (err) {
           error(err)
-          res.send('// Sorry, an error has occured, please try again!')
+          return res.status(500).send({
+            code: '// Sorry, an error has occured, please try again!',
+            message: 'Repl not loaded...'
+          })
         }
         if (!strings) {
           console.log('MongoID not found')
-          res.send('// Sorry, this repl does not exist')
+          res.send({
+            code: '// Sorry, this repl does not exist :-(',
+            message: 'Repl not loaded...'
+          })
         } else {
-          // send code to user
-          res.send(strings.code)
+          console.log('Retrieving code...')
+          res.send({
+            code: strings.code,
+            message: 'Shared repl loaded...'
+          })
         }
       })
     }
