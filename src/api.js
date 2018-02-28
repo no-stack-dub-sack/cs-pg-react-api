@@ -57,10 +57,12 @@ module.exports = {
           res.send('// Sorry, an error has occured, please try again!')
         }
         if (!strings) {
+          console.log('MongoID not found')
           res.send('// Sorry, this repl does not exist')
+        } else {
+          // send code to user
+          res.send(strings.code)
         }
-        // send code to user
-        res.send(strings.code)
       })
     }
   }
