@@ -6,7 +6,7 @@ const error = (err) =>
 
 // NOTE: CHANGE FOR PROD!!!
 const re = process.env.NODE_ENV === 'production'
-  ? /^https?:\/\/questionable-number.surge.sh/
+  ? /^https?:\/\/cs-playground-react.surge.sh/
   : /^http:\/\/localhost:3000/
 
 // only allow calls from cs-pg-react with api_key
